@@ -16,8 +16,8 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define BASE 0
-#define NUM 1
+#define BASE_WIN 0
+#define NUM_WIN 1
 #define SYM 2
 
 &mt {
@@ -46,7 +46,7 @@
         td_quotes: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&kp SQT>, <&kp DQT>;
         };
         td_dots: tap_dance_1 {
@@ -64,7 +64,7 @@
         td_marks: tap_dance_3 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&kp QMARK>, <&kp EXCL>;
         };
         td_grave: tap_dance_4 {
@@ -99,9 +99,9 @@
         keymap {
                 compatible = "zmk,keymap";
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-                base_layer {
+                base_win_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE"                              ;
+label= "BASE_WIN"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
@@ -110,7 +110,7 @@ label= "BASE"                              ;
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃   NUM     ┃     Z     ┃     X     ┃     C     ┃     D     ┃     V     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃    SYM    ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    BACK   ┃    BSPC   ┃     DEL   ┃   ┃TAB or ALT ┃SPC or SHFT┃    FWD    ┃
+//                                     ┃    HOME   ┃    BSPC   ┃RSFT or CPS┃   ┃TAB or ALT ┃SPC or SHFT┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
  bindings = <
@@ -118,17 +118,17 @@ label= "BASE"                              ;
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
                 &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-    &mo NUM     &kp Z       &kp X       &kp C       &kp D       &kp V           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &mo SYM
-                                        &kp C_PREV  &kp BSPC    &kp LSHFT       &mt TAB RALT &mt SPACE RSHFT &kp C_NEXT
+    &mo NUM_WIN &kp Z       &kp X       &kp C       &kp D       &kp V           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &mo SYM
+                                        &kp DEL     &kp BSPC    &mt RSHFT CAPS  &mt RALT TAB &kp SPACE  &none
                         >;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
-                num_layer {
+                num_win_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NUM"                              ;
+label= "NUM_WIN"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
@@ -143,9 +143,9 @@ label= "NUM"                              ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &none       &none       &none       &none       &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
-                &none       &none       &kp K_CUT   &kp K_COPY  &kp K_PASTE     &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
+                &none       &none       &kp LC(X)   &kp LC(C)   &kp LC(V)       &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
     &trans      &none       &none       &none       &none       &none           &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
-                                        &kp K_UNDO  &none       &none           &kp N0      &none      &kp K_REDO      
+                                        &kp LC(Z)   &none       &none           &kp N0      &trans     &kp LC(LS(Z))     
                         >;
                 };
 
