@@ -16,15 +16,22 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
+// NUMBERS REPRESENT INDEXES OF LAYERS IN THE KEYMAP
 #define BASE_WIN 0
-#define NUM_WIN 1
-#define SYM 2
+#define BASE_MAC 2
+#define OP_NUM_WIN 1 // OPERATIONS AND NUMBERS FOR WINDOWS
+#define OP_NUM_MAC 3 // OPERATIONS AND NUMBERS FOR MAC
+#define NAV_SYM 4 // NAVIGATION AND SYMBOLS
+#define KB_CTRL 5 // KEYBOARD CONTROL
+
+
+#define DUMMY_KEY F24 // DUMMY KEY
 
 &mt {
   quick-tap-ms = <100>;
   global-quick-tap;
   flavor = "tap-preferred";
-  tapping-term-ms = <170>;
+  tapping-term-ms = <200>;
 };
 
 / {
@@ -39,6 +46,12 @@
                 timeout-ms = <50>;
                 key-positions = <16 17 18>;
                 bindings = <&kp ENTER>;
+            };
+            combo_control_layer {
+                timeout-ms = <50>;
+                key-positions = <20 31>;
+                layers = <BASE_WIN BASE_MAC KB_CTRL>;
+                bindings = <&tog KB_CTRL>;
             };
     };
 
@@ -79,6 +92,26 @@
             tapping-term-ms = <200>;
             bindings = <&kp EQUAL>, <&kp LESS_THAN>, <&kp GREATER_THAN>;
         };
+        td_line: tap_dance_6 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp EQUAL>, <&kp UNDER>;
+        };
+
+        // NAV
+        // td_win_layers: tap_dance_7 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <200>;
+        //     bindings = <&mo OP_NUM_WIN>, <&mo NAV_SYM>;
+        // };
+        // td_mac_layers: tap_dance_8 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <200>;
+        //     bindings = <&lt OP_NUM_WIN  DUMMY_KEY >, <&lt NAV_SYM DUMMY_KEY>;
+        // };
     };
 
 // WHAT DOES THIS MACRO DO?
@@ -101,16 +134,16 @@
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
                 base_win_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE_WIN"                              ;
+label= "BASE_WIN"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃     A     ┃     R     ┃     S     ┃     T     ┃     G     ┃   ┃     M     ┃     N     ┃     E     ┃     I     ┃     O     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃    SYM    ┃
+// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃   - or _  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    DEL    ┃RSFT or CPS┃    BSPC   ┃   ┃    SPC    ┃ TAB or ALT┃           ┃
+//                                     ┃   BSPC    ┃ TABorSPACE┃S_ENTERorNAV┃  ┃ RSFT or CAPS┃ SPACE  ┃    ALT     ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
  bindings = <
@@ -118,61 +151,136 @@ label= "BASE_WIN"                              ;
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
                 &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-    &mo NUM_WIN &kp X       &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &mo SYM
-                                        &kp DEL     &kp BSPC    &mt RSHFT CAPS  &mt RALT TAB  &kp SPACE &none
+    &mo OP_NUM_WIN &kp X    &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &td_line
+                                        &kp BSPC    &mt TAB SPACE &lt NAV_SYM LS(ENTER) &mt RSHFT CAPS &mt TAB SPACE &kp RALT 
                         >;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
-
-                num_win_layer {
+                op_num_win_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NUM_WIN"                              ;
+label= "OP_NUM_WIN"                            ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃           ┃           ┃           ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
+//             ┃           ┃   VS LINE ┃    FIND   ┃    CUT    ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   ALL     ┃  REV-SRCH ┃           ┃    COPY   ┃   PASTE   ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
+//             ┃           ┃ REV-SRCH  ┃    ALL    ┃    COPY   ┃   PASTE   ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃           ┃           ┃    CUT    ┃           ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
+// ┃           ┃           ┃   STOP    ┃           ┃    UNDO   ┃   REDO    ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    UNDO   ┃           ┃           ┃   ┃     0     ┃   SPACE   ┃    REDO   ┃
+//                                     ┃    BSCP   ┃    SPC    ┃SOFT ENTER ┃   ┃           ┃     0     ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &none       &none       &none       &none       &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
-                &kp LC(A)   &kp LC(R)   &none       &none       &none           &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
-    &trans      &kp LC(X)   &kp LC(C)   &none       &kp LC(V)   &kp LC(Z)       &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
-                                        &trans      &trans      &kp RSHFT       &kp N0      &trans     &none    
+                &none       &kp LC(G)   &kp LC(F)   &kp LC(X)   &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
+                &none       &kp LC(R)   &kp LC(A)   &kp LC(C)   &kp LC(V)       &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
+    &none       &none       &kp LC(C)   &none       &kp LC(Z)   &kp LS(LC(Z))   &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
+                                        &trans      &trans      &trans          &none       &kp N0     &none    
                         >;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
-
-                sym_layer {
+                base_mac_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "SYM"                               ;
+label= "BASE_MAC"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃  ` or ~   ┃     @     ┃     #     ┃      [    ┃           |   ┃           ┃     ]     ┃           ┃           ┃           ┃
+//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃     $     ┃     &     ┃      (    ┃           ┃   ┃           ┃     )     ┃           ┃           ┃           ┃ 
+//             ┃     A     ┃     R     ┃     S     ┃     T     ┃     G     ┃   ┃     M     ┃     N     ┃     E     ┃     I     ┃     O     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃           ┃           ┃      {    ┃           ┃   ┃           ┃     }     ┃           ┃           ┃           ┃           ┃ 
+// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃   - or _  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
+//                                     ┃   BSPC    ┃ TABorSPACE┃S_ENTERorNAV┃  ┃    ALT    ┃RSFT or CAPS┃          ┃
+//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+
+ bindings = <
+// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+
+                &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
+                &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
+    &mo OP_NUM_MAC &kp X    &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &td_line
+                                        &kp BSPC    &mt TAB SPACE &lt NAV_SYM LS(ENTER) &mt RSHFT CAPS &mt TAB SPACE &kp RALT  
+                        >;
+                };
+
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+                op_num_mac_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "OP_NUM_MAC"                            ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃           ┃   VS LINE ┃    FIND   ┃    CUT    ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃           ┃ REV-SRCH  ┃    ALL    ┃    COPY   ┃   PASTE   ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃           ┃   STOP    ┃           ┃    UNDO   ┃   REDO    ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃           ┃           ┃           ┃   ┃           ┃     0     ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &td_grave   &kp AT      &kp HASH    &kp LBKT    &none           &none      &kp RBKT     &none       &none       &none
-                &none       &kp DOLLAR  &kp AMPS    &kp LPAR    &none           &none      &kp RPAR     &none       &none       &none 
-    &none       &none       &none       &none       &kp LBRC    &none           &none      &kp RBRC     &none       &none       &none       &trans          
-                                        &none       &none       &none           &none      &none        &none       
+                &none       &kp LC(G)   &kp LG(F)   &kp LG(X)   &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
+                &none       &kp LG(R)   &kp LG(A)   &kp LG(C)   &kp LG(V)       &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
+    &none       &none       &kp LC(C)   &none       &kp LG(Z)   &kp LS(LG(Z))   &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
+                                        &trans      &trans      &trans          &none       &kp N0     &none    
                         >;
                 };
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+
+                nav_sym_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "NAV_SYM"                           ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃           ┃           ┃           ┃           ┃           |   ┃     [     ┃     ]     ┃     @     ┃     #     ┃           ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃           ┃    LEFT   ┃     UP    ┃   RIGHT   ┃           ┃   ┃     (     ┃     )     ┃     $     ┃     &     ┃           ┃ 
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃           ┃           ┃    DOWN   ┃    GUI    ┃           ┃   ┃     {     ┃     }     ┃  ` or ~   ┃     _     ┃           ┃           ┃ 
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃           ┃           ┃           ┃   ┃     <     ┃     >     ┃           ┃
+//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+ bindings = <
+// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+
+                &none      &none       &none       &none        &none            &kp LBKT    &kp RBKT    &kp AT      &kp HASH    &none
+                &none      &kp LEFT    &kp UP      &kp RIGHT    &none            &kp LPAR    &kp RPAR    &kp DOLLAR  &kp AMPS    &none       
+    &none       &none      &none       &kp DOWN    &kp LGUI     &none            &kp LBRC    &kp RBRC    &td_grave   &kp UNDER   &none       &none           
+                                       &none       &none        &none            &kp LT      &kp GT      &none       
+                        >;
+                };
+
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+                kb_ctrl_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "KB_CTRL"                           ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃           ┃           ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃           ┃           ┃           ┃    WIN    ┃    MAC    ┃   ┃           ┃   RESET   ┃ BOOTLOAD  ┃           ┃           ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃           ┃           ┃           ┃  BT PREV  ┃  BT NEXT  ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃           ┃  BT CLR   ┃           ┃   ┃           ┃           ┃           ┃
+//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+ bindings = <
+// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+
+                &none       &none       &none       &none       &none           &none       &none       &none       &none       &none       
+                &none       &none       &none       &to BASE_WIN &to BASE_MAC   &none       &sys_reset  &bootloader &none       &none        
+    &none       &none       &none       &none       &bt BT_PRV  &bt BT_NXT      &none       &none       &none       &none       &none       &none                
+                                        &none       &bt BT_CLR  &none           &none       &none       &none       
+                        >;
+                };
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
         };
 };
