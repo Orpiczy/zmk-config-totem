@@ -17,13 +17,10 @@
 #include <dt-bindings/zmk/outputs.h>
 
 // NUMBERS REPRESENT INDEXES OF LAYERS IN THE KEYMAP
-#define BASE_WIN 0
-#define BASE_MAC 2
-#define OP_NUM_WIN 1 // OPERATIONS AND NUMBERS FOR WINDOWS
-#define OP_NUM_MAC 3 // OPERATIONS AND NUMBERS FOR MAC
-#define NAV_SYM 4 // NAVIGATION AND SYMBOLS
-#define KB_CTRL 5 // KEYBOARD CONTROL
-
+#define BASE 0
+#define OP_NUM 1
+#define SYM  2
+#define KB_CTRL 3
 
 #define DUMMY_KEY F24 // DUMMY KEY
 
@@ -50,7 +47,7 @@
             combo_control_layer {
                 timeout-ms = <50>;
                 key-positions = <20 31>;
-                layers = <BASE_WIN BASE_MAC KB_CTRL>;
+                layers = <BASE KB_CTRL>;
                 bindings = <&tog KB_CTRL>;
             };
     };
@@ -92,12 +89,19 @@
             tapping-term-ms = <200>;
             bindings = <&kp EQUAL>, <&kp LESS_THAN>, <&kp GREATER_THAN>;
         };
-        td_line: tap_dance_6 {
+        td_line_or_hsym: tap_dance_6 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+            bindings = <&lt SYM MINUS>, <&kp UNDER>;
+        };
+        td_ctrl_a: tap_dance_7 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp EQUAL>, <&kp UNDER>;
+            bindings = <&mt LCTRL A>, <&kp LC(A)>;
         };
+        
 
         // NAV
         // td_win_layers: tap_dance_7 {
@@ -132,27 +136,27 @@
         keymap {
                 compatible = "zmk,keymap";
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-                base_win_layer {
+                base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE_WIN"                           ;
+label= "BASE"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     A     ┃     R     ┃     S     ┃     T     ┃     G     ┃   ┃     M     ┃     N     ┃     E     ┃     I     ┃     O     ┃
+//             ┃ Ctrl or A ┃ Alt or R  ┃ GUI or S  ┃ Shift or T┃     G     ┃   ┃     M     ┃ Shift or N┃ GUI or E  ┃ Alt or I  ┃ Ctrl or O ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃   - or _  ┃
+// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃   ? or !  ┃   - or _  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃   BSPC    ┃ TABorSPACE┃S_ENTERorNAV┃  ┃ RSFT or CAPS┃ SPACE  ┃    ALT     ┃
+//                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃Shift+Enter┃ TAB or SPACE┃    DEL    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
-                &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-    &mo OP_NUM_WIN &kp X    &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &td_line
-                                        &kp BSPC    &mt TAB SPACE &lt NAV_SYM LS(ENTER) &mt RSHFT CAPS &mt TAB SPACE &kp RALT 
+                &td_ctrl_a  &mt LALT R  &mt LGUI S  &mt LSHFT T &kp G           &kp M       &mt RSHIFT N &mt RGUI E &mt RALT I  &mt LCTRL O
+    &lt OP_NUM FSLH &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks   &td_line_or_hsym
+                                        &kp BSPC    &mt TAB SPACE &kp ENTER     &kp ENTER   &mt TAB SPACE &kp DEL
                         >;
                 };
 
@@ -160,100 +164,47 @@ label= "BASE_WIN"                           ;
 
                 op_num_win_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "OP_NUM_WIN"                            ;
+label= "OP_NUM"                            ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃   VS LINE ┃    FIND   ┃    CUT    ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
+//             ┃           ┃           ┃           ┃           ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃ REV-SRCH  ┃    ALL    ┃    COPY   ┃   PASTE   ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
+//             ┃           ┃   LEFT    ┃     UP    ┃   RIGHT   ┃    PG_UP  ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃   STOP    ┃           ┃    UNDO   ┃   REDO    ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
+// ┃           ┃           ┃           ┃    DOWN   ┃           ┃    PG_DN  ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    BSCP   ┃    SPC    ┃SOFT ENTER ┃   ┃           ┃     0     ┃           ┃
+//                                     ┃           ┃           ┃           ┃   ┃           ┃     0     ┃   ` or ~  ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &none       &kp LC(G)   &kp LC(F)   &kp LC(X)   &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
-                &none       &kp LC(R)   &kp LC(A)   &kp LC(C)   &kp LC(V)       &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
-    &none       &none       &kp LC(C)   &none       &kp LC(Z)   &kp LS(LC(Z))   &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
-                                        &trans      &trans      &trans          &none       &kp N0     &none    
+                &none      &none       &none       &none        &none            &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
+                &none      &kp LEFT    &kp UP      &mt LSHFT RIGHT &kp PG_UP     &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
+    &none       &none      &kp END     &kp DOWN    &kp HOME     &kp PG_DN        &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
+                                       &trans      &trans       &trans           &trans       &kp N0    &td_grave   
                         >;
                 };
-
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
-                base_mac_layer {
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE_MAC"                           ;
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
-//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     A     ┃     R     ┃     S     ┃     T     ┃     G     ┃   ┃     M     ┃     N     ┃     E     ┃     I     ┃     O     ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃   , or ;  ┃   . or :  ┃   ? or !  ┃   - or _  ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃   BSPC    ┃ TABorSPACE┃S_ENTERorNAV┃  ┃    ALT    ┃RSFT or CAPS┃          ┃
-//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-
- bindings = <
-// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
-
-                &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
-                &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-    &mo OP_NUM_MAC &kp X    &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks    &td_line
-                                        &kp BSPC    &mt TAB SPACE &lt NAV_SYM LS(ENTER) &mt RSHFT CAPS &mt TAB SPACE &kp RALT  
-                        >;
-                };
-
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
-                op_num_mac_layer {
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "OP_NUM_MAC"                            ;
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃   VS LINE ┃    FIND   ┃    CUT    ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
-//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃ REV-SRCH  ┃    ALL    ┃    COPY   ┃   PASTE   ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃   STOP    ┃           ┃    UNDO   ┃   REDO    ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃           ┃   ┃           ┃     0     ┃           ┃
-//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
- bindings = <
-// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
-
-                &none       &kp LC(G)   &kp LG(F)   &kp LG(X)   &none           &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
-                &none       &kp LG(R)   &kp LG(A)   &kp LG(C)   &kp LG(V)       &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
-    &none       &none       &kp LC(C)   &none       &kp LG(Z)   &kp LS(LG(Z))   &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
-                                        &trans      &trans      &trans          &none       &kp N0     &none    
-                        >;
-                };
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 
                 nav_sym_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NAV_SYM"                           ;
+label= "SYM"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃           ┃           ┃           ┃           |   ┃     [     ┃     ]     ┃     @     ┃     #     ┃           ┃
+//             ┃           ┃           ┃           ┃           ┃           |   ┃           ┃     [     ┃     ]     ┃           ┃           ┃           
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃    LEFT   ┃     UP    ┃   RIGHT   ┃           ┃   ┃     (     ┃     )     ┃     $     ┃     &     ┃           ┃ 
+//             ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃     (     ┃     )     ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃           ┃    DOWN   ┃    GUI    ┃           ┃   ┃     {     ┃     }     ┃  ` or ~   ┃     _     ┃           ┃           ┃ 
+// ┃           ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃     {     ┃     }     ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃           ┃   ┃     <     ┃     >     ┃           ┃
+//                                     ┃           ┃           ┃           ┃   ┃           ┃     <     ┃     >     ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &none      &none       &none       &none        &none            &kp LBKT    &kp RBKT    &kp AT      &kp HASH    &none
-                &none      &kp LEFT    &kp UP      &kp RIGHT    &none            &kp LPAR    &kp RPAR    &kp DOLLAR  &kp AMPS    &none       
-    &none       &none      &none       &kp DOWN    &kp LGUI     &none            &kp LBRC    &kp RBRC    &td_grave   &kp UNDER   &none       &none           
-                                       &none       &none        &none            &kp LT      &kp GT      &none       
+                &none      &none       &none       &none        &none           &none       &kp LBKT    &kp RBKT    &none       &none
+                &none      &none       &none       &none        &none           &none       &kp LPAR    &kp RPAR    &none       &none       
+    &none       &none      &none       &none       &none        &none           &none       &kp LBRC    &kp RBRC    &none       &none       &none   
+                                       &trans      &trans       &trans          &none       &kp LT      &kp GT           
                         >;
                 };
 
@@ -266,9 +217,9 @@ label= "KB_CTRL"                           ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃           ┃           ┃    WIN    ┃    MAC    ┃   ┃           ┃   RESET   ┃ BOOTLOAD  ┃           ┃           ┃
+//             ┃           ┃           ┃           ┃  BT PREV  ┃  BT NEXT  ┃   ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃           ┃           ┃  BT PREV  ┃  BT NEXT  ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┃           ┃           ┃           ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃  BT CLR   ┃           ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -276,8 +227,8 @@ label= "KB_CTRL"                           ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &none       &none       &none       &none       &none           &none       &none       &none       &none       &none       
-                &none       &none       &none       &to BASE_WIN &to BASE_MAC   &none       &sys_reset  &bootloader &none       &none        
-    &none       &none       &none       &none       &bt BT_PRV  &bt BT_NXT      &none       &none       &none       &none       &none       &none                
+                &none       &none       &none       &bt BT_PRV  &bt BT_NXT      &none       &none       &none       &none       &none        
+    &none       &none       &none       &none       &none       &none           &none       &none       &none       &none       &none       &none                
                                         &none       &bt BT_CLR  &none           &none       &none       &none       
                         >;
                 };
