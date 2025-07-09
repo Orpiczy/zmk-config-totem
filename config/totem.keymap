@@ -93,7 +93,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <300>;
-            bindings = <&lt SYM MINUS>, <&kp UNDER>;
+            bindings = <&lt SYM UNDER>, <&kp MINUS>;
         };
         td_ctrl_a: tap_dance_7 {
             compatible = "zmk,behavior-tap-dance";
@@ -143,9 +143,9 @@ label= "BASE"                           ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃ Ctrl or A ┃ Alt or R  ┃ GUI or S  ┃ Shift or T┃     G     ┃   ┃     M     ┃ Shift or N┃ GUI or E  ┃ Alt or I  ┃ Ctrl or O ┃
+//             ┃ Ctrl or A ┃ Alt or R  ┃     S     ┃ Shift or T┃   LGUI G  ┃   ┃     M     ┃ Shift or N┃ GUI or E  ┃ Alt or I  ┃ Ctrl or O ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃   ? or !  ┃   - or _  ┃
+// ┃   NUM     ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃   ? or !  ┃   _ or -  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃Shift+Enter┃ TAB or SPACE┃    DEL    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -171,7 +171,7 @@ label= "OP_NUM"                            ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃           ┃   LEFT    ┃     UP    ┃   RIGHT   ┃    PG_UP  ┃   ┃     -     ┃     4     ┃     5     ┃     6     ┃     /     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃           ┃    DOWN   ┃           ┃    PG_DN  ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
+// ┃           ┃           ┃   HOME    ┃    DOWN   ┃    END    ┃    PG_DN  ┃   ┃= or < or >┃     1     ┃     2     ┃     3     ┃     ^     ┃     %     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃           ┃           ┃   ┃           ┃     0     ┃   ` or ~  ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -179,8 +179,8 @@ label= "OP_NUM"                            ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &none      &none       &none       &none        &none            &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
-                &none      &kp LEFT    &kp UP      &mt LSHFT RIGHT &kp PG_UP     &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
-    &none       &none      &kp HOME    &kp DOWN    &kp END     &kp PG_DN        &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
+                &trans     &mt LALT LEFT &kp UP    &mt LSHFT RIGHT &mt LGUI PG_UP &kp MINUS   &kp N4     &kp N5      &kp N6      &kp FSLH
+    &none       &none      &kp HOME    &kp DOWN    &kp END     &kp PG_DN         &td_equal   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT      
                                        &trans      &trans       &trans           &trans       &kp N0    &td_grave   
                         >;
                 };
