@@ -66,73 +66,73 @@
         td_quotes: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <250>;
             bindings = <&kp SQT>, <&kp DQT>;
         };
         td_dots: tap_dance_1 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp DOT>, <&kp COLON>;
         };
         td_sdots: tap_dance_2 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp COMMA>, <&kp SEMICOLON>;
         };
         td_marks: tap_dance_3 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <250>;
             bindings = <&kp QMARK>, <&kp EXCL>;
         };
         td_grave: tap_dance_4 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp GRAVE>, <&kp TILDE>;
         };
         td_equal: tap_dance_5 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp EQUAL>, <&kp LESS_THAN>, <&kp GREATER_THAN>;
         };
         td_line_or_hsym: tap_dance_6 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <250>;
             bindings = <&lt SYM UNDER>, <&kp MINUS>;
         };
         td_ctrl_a: tap_dance_7 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <250>;
             bindings = <&mt LCTRL A>, <&kp LC(A)>;
         };
         td_left: tap_dance_8 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <220>;
             bindings = <&mt LALT LEFT>, <&kp LEFT>;
         };
         td_right: tap_dance_9 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <220>;
             bindings = <&mt LSHFT RIGHT>, <&kp RIGHT>;
         };
         td_layers_right: tap_dance_10 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <220>;
             bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
         };
         td_layers_left: tap_dance_11 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <220>;
             bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
         };
 
@@ -188,7 +188,7 @@ label= "BASE"                           ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
-                &td_ctrl_a  &mt LALT R  &kp S       &mt LSHFT T &mt LGUI G      &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
+                &mt LCTRL A  &mt LALT R &mt LC(A) S &mt LSHFT T &mt LGUI G      &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
     &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots   &td_marks   &td_layers_right
                                         &kp BSPC    &mt TAB SPACE &kp ENTER     &kp ENTER   &mt TAB SPACE &kp DEL
                         >;
