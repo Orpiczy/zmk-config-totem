@@ -129,12 +129,34 @@
             tapping-term-ms = <220>;
             bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
         };
+        // switching layers takes too much time, and you don't use the under and minus keys that often
+        // td_layers_left: tap_dance_11 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <200>;
+        //     bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
+        // };
         td_layers_left: tap_dance_11 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <220>;
-            bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
+            bindings = <&mo OP_NUM>, <&mo SYM>;
         };
+        // you could do this with mod tap, but too often you hold it too long causing selection and then overwrite with the next stroke
+        td_s_or_all: tap_dance_12 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <220>;
+            bindings = <&kp S>, <&kp LC(A)>;
+        };
+        // tap dance for shift, caps lock, and t
+        td_t_or_all_shift: tap_dance_13 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <220>;
+            bindings = <&mt LSHFT T>, <&caps_word>;
+        };
+
 
 
         // NAV
@@ -188,8 +210,8 @@ label= "BASE"                           ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
-                &mt LCTRL A  &mt LALT R &mt LC(A) S &mt LSHFT T &mt LGUI G      &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
-    &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots   &td_marks   &td_layers_right
+                &mt LCTRL A &mt LALT R  &td_s_or_all &td_t_or_all_shift &mt LGUI G &mt RGUI M  &mt RSHIFT N &kp E   &mt RALT I  &mt LCTRL O
+    &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks   &td_layers_right
                                         &kp BSPC    &mt TAB SPACE &kp ENTER     &kp ENTER   &mt TAB SPACE &kp DEL
                         >;
                 };
