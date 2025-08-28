@@ -60,6 +60,13 @@
                 layers = <BASE KB_CTRL>;
                 bindings = <&tog KB_CTRL>;
             };
+
+            combo_del {  // bcsk but forward
+                timeout-ms = <50>;
+                key-positions = <13 33>;
+                layers = <BASE OP_NUM SYM>;
+                bindings = <&kp DEL>;
+            };
     };
 
     behaviors {
@@ -99,12 +106,12 @@
             tapping-term-ms = <250>;
             bindings = <&kp EQUAL>, <&kp LESS_THAN>, <&kp GREATER_THAN>;
         };
-        td_line_or_hsym: tap_dance_6 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&lt SYM UNDER>, <&kp MINUS>;
-        };
+        // td_line_or_hsym: tap_dance_6 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <250>;
+        //     bindings = <&lt SYM UNDER>, <&kp MINUS>;
+        // };
         td_ctrl_a: tap_dance_7 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -156,6 +163,12 @@
             tapping-term-ms = <220>;
             bindings = <&mt LSHFT T>, <&caps_word>;
         };
+        // td_line_or_hsym: tap_dance_14 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <250>;
+        //     bindings = <&kp SYM UNDER>, <&kp MINUS>;
+        // };
 
 
 
@@ -167,26 +180,11 @@
         //     bindings = <&mo OP_NUM_WIN>, <&mo NAV_SYM>;
         // };
         // td_mac_layers: tap_dance_8 {
-        //     compatible = "zmk,behavior-tap-dance";
+        //     compatible = "zmk,behavior-tap-dance";r
         //     #binding-cells = <0>;
         //     tapping-term-ms = <200>;
         //     bindings = <&lt OP_NUM_WIN  DUMMY_KEY >, <&lt NAV_SYM DUMMY_KEY>;
         // };
-    };
-
-// WHAT DOES THIS MACRO DO?
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
-        };
     };
 
         keymap {
@@ -197,22 +195,22 @@
 label= "BASE"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "   ┃
+//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "  use shift  ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃ Ctrl or A ┃ Alt or R  ┃     S     ┃ Shift or T┃   LGUI G  ┃   ┃     M     ┃ Shift or N┃ GUI or E  ┃ Alt or I  ┃ Ctrl or O ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃ NUM or -  ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃   ? or !  ┃ _ or - or NUM OR SYM ┃
+// ┃NUM or SYM ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃  - or - use shift  ┃  ? or !  ┃ 
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃Shift+Enter┃ TAB or SPACE┃    DEL    ┃
+//                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &td_quotes
-                &mt LCTRL A &mt LALT R  &td_s_or_all &td_t_or_all_shift &mt LGUI G &mt RGUI M  &mt RSHIFT N &kp E   &mt RALT I  &mt LCTRL O
-    &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &td_marks   &td_layers_right
-                                        &kp BSPC    &mt TAB SPACE &kp ENTER     &kp ENTER   &mt TAB SPACE &kp DEL
+                &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &kp SQT
+                &mt LCTRL A &mt LALT R  &td_s_or_all &mt LSHFT T &mt LGUI G     &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
+    &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &kp MINUS  &td_marks   
+                                        &kp BSPC    &mt TAB SPACE &kp ENTER     &none       &none       &none       
                         >;
                 };
 
@@ -237,7 +235,7 @@ label= "OP_NUM"                            ;
                 &none      &none       &none       &none        &none            &kp PLUS    &kp N7     &kp N8      &kp N9      &kp ASTRK
                 &trans     &td_left    &kp UP      &td_right    &mt LGUI PG_UP   &td_equal   &kp N4     &kp N5      &kp N6      &mt BSLH FSLH
     &none       &none      &kp HOME    &kp DOWN    &kp END      &kp PG_DN        &kp MINUS   &kp N1     &kp N2      &kp N3      &kp CARET   &kp PERCENT
-                                       &trans      &trans       &trans           &trans      &kp N0    &td_grave
+                                       &trans      &trans       &trans           &trans      &kp N0     &kp GRAVE
                         >;
                 };
 
