@@ -17,8 +17,8 @@
 #include <dt-bindings/zmk/outputs.h>
 
 // NUMBERS REPRESENT INDEXES OF LAYERS IN THE KEYMAP
-#define BASE 0
-#define OP_NUM 1
+#define WRITE 0
+#define NAV 1
 #define SYM  2
 #define KB_CTRL 3
 
@@ -44,6 +44,21 @@
                 key-positions = <12 13>;
                 bindings = <&kp ENTER>;
             };
+            combo_write_left {
+                timeout-ms = <50>;
+                key-positions = <20>;
+                bindings = <&to WRITE>;
+            };
+            combo_nav_left {
+                timeout-ms = <50>;
+                key-positions = <20 14>;
+                bindings = <&to NAV>;
+            };
+            combo_sym_left {
+                timeout-ms = <50>;
+                key-positions = <20 2>;
+                bindings = <&to SYM>;
+            };
             combo_enter_right {
                 timeout-ms = <50>;
                 key-positions = <16 17>;
@@ -54,17 +69,32 @@
                 key-positions = <17 18>;
                 bindings = <&kp ESC>;
             };
+            combo_write_right {
+                timeout-ms = <50>;
+                key-positions = <31>;
+                bindings = <&to WRITE>;
+            };
+            combo_nav_right {
+                timeout-ms = <50>;
+                key-positions = <31 16>;
+                bindings = <&to NAV>;
+            };
+            combo_sym_right {
+                timeout-ms = <50>;
+                key-positions = <31 7>;
+                bindings = <&to SYM>;
+            };
             combo_control_layer {
                 timeout-ms = <50>;
                 key-positions = <20 31>;
-                layers = <BASE KB_CTRL>;
+                layers = <WRITE KB_CTRL>;
                 bindings = <&tog KB_CTRL>;
             };
 
             combo_del {  // bcsk but forward
                 timeout-ms = <50>;
                 key-positions = <13 33>;
-                layers = <BASE OP_NUM SYM>;
+                layers = <WRITE NAV SYM>;
                 bindings = <&kp DEL>;
             };
     };
@@ -130,25 +160,25 @@
             tapping-term-ms = <220>;
             bindings = <&mt LSHFT RIGHT>, <&kp RIGHT>;
         };
-        td_layers_right: tap_dance_10 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <220>;
-            bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
-        };
+        // td_layers_right: tap_dance_10 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <220>;
+        //     bindings = <&lt NAV UNDER>, <&lt SYM MINUS>;
+        // };
         // switching layers takes too much time, and you don't use the under and minus keys that often
         // td_layers_left: tap_dance_11 {
         //     compatible = "zmk,behavior-tap-dance";
         //     #binding-cells = <0>;
         //     tapping-term-ms = <200>;
-        //     bindings = <&lt OP_NUM UNDER>, <&lt SYM MINUS>;
+        //     bindings = <&lt NAV UNDER>, <&lt SYM MINUS>;
         // };
-        td_layers_left: tap_dance_11 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <220>;
-            bindings = <&mo OP_NUM>, <&mo SYM>;
-        };
+        // td_layers_left: tap_dance_11 {
+        //     compatible = "zmk,behavior-tap-dance";
+        //     #binding-cells = <0>;
+        //     tapping-term-ms = <220>;
+        //     bindings = <&mo NAV>, <&mo SYM>;
+        // };
         // you could do this with mod tap, but too often you hold it too long causing selection and then overwrite with the next stroke
         td_s_or_all: tap_dance_12 {
             compatible = "zmk,behavior-tap-dance";
@@ -190,18 +220,18 @@
         keymap {
                 compatible = "zmk,keymap";
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-                base_layer {
+                write_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE"                           ;
+label= "WRITE"                           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     B     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃  ' or "  use shift  ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃ Ctrl or A ┃ Alt or R  ┃     S     ┃ Shift or T┃   LGUI G  ┃   ┃     M     ┃ Shift or N┃ GUI or E  ┃ Alt or I  ┃ Ctrl or O ┃
+//             ┃ Ctrl or A ┃ Alt or R  ┃     S     ┃ Shift or T┃   LGUI G  ┃   ┃     M     ┃ Shift or N┃      E    ┃ Alt or I  ┃ Ctrl or O ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃NUM or SYM ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃  - or - use shift  ┃  ? or !  ┃ 
+// ┃NUM or SYM ┃     X     ┃     C     ┃     D     ┃     V     ┃     Z     ┃   ┃     K     ┃     H     ┃  , or ;   ┃   . or :  ┃  - or - use shift  ┃ ` or ~ ┃ 
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃           ┃           ┃           ┃
+//                                     ┃   BSPC    ┃ TAB or SPACE┃Shift+Enter┃ ┃           ┃           ┃   ? or !  ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
  bindings = <
@@ -209,16 +239,16 @@ label= "BASE"                           ;
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &kp SQT
                 &mt LCTRL A &mt LALT R  &td_s_or_all &mt LSHFT T &mt LGUI G     &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
-    &td_layers_left &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &kp MINUS  &td_marks   
-                                        &kp BSPC    &mt TAB SPACE &kp ENTER     &none       &none       &none       
+    &none       &kp X   &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &kp MINUS  &kp GRAVE  
+                                        &kp BSPC    &mt TAB SPACE &kp ENTER     &none       &none       &td_marks       
                         >;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
-                op_num_win_layer {
+                nav_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "OP_NUM"                            ;
+label= "NAV"                            ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃           ┃   ┃     +     ┃     7     ┃     8     ┃     9     ┃     *     ┃
@@ -239,7 +269,7 @@ label= "OP_NUM"                            ;
                         >;
                 };
 
-                nav_sym_layer { 
+                sym_layer { 
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 label= "SYM"                               ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
