@@ -51,13 +51,15 @@
             };
             combo_nav_left {
                 timeout-ms = <50>;
-                key-positions = <20 14>;
-                bindings = <&to NAV>;
+                slow-release;
+                key-positions = <20 13>;
+                bindings = <&mo NAV>;
             };
             combo_sym_left {
                 timeout-ms = <50>;
+                slow-release;
                 key-positions = <20 2>;
-                bindings = <&to SYM>;
+                bindings = <&mo SYM>;
             };
             combo_enter_right {
                 timeout-ms = <50>;
@@ -69,20 +71,17 @@
                 key-positions = <17 18>;
                 bindings = <&kp ESC>;
             };
-            combo_write_right {
-                timeout-ms = <50>;
-                key-positions = <31>;
-                bindings = <&to WRITE>;
-            };
             combo_nav_right {
                 timeout-ms = <50>;
+                slow-release;
                 key-positions = <31 16>;
-                bindings = <&to NAV>;
+                bindings = <&mo NAV>;
             };
             combo_sym_right {
                 timeout-ms = <50>;
+                slow-release;
                 key-positions = <31 7>;
-                bindings = <&to SYM>;
+                bindings = <&mo SYM>;
             };
             combo_control_layer {
                 timeout-ms = <50>;
@@ -93,8 +92,7 @@
 
             combo_del {  // bcsk but forward
                 timeout-ms = <50>;
-                key-positions = <13 33>;
-                layers = <WRITE NAV SYM>;
+                key-positions = <13 32>;
                 bindings = <&kp DEL>;
             };
     };
