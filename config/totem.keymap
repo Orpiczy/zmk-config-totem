@@ -34,6 +34,8 @@
 / {
      combos {
             compatible = "zmk,combos";
+
+            // COMBO LEFT HAND
             combo_esc_left {
                 timeout-ms = <50>;
                 key-positions = <11 12>;
@@ -44,15 +46,10 @@
                 key-positions = <12 13>;
                 bindings = <&kp ENTER>;
             };
-            combo_write_left {
-                timeout-ms = <50>;
-                key-positions = <20>;
-                bindings = <&to WRITE>;
-            };
             combo_nav_left {
                 timeout-ms = <50>;
                 slow-release;
-                key-positions = <20 13>;
+                key-positions = <20>;
                 bindings = <&mo NAV>;
             };
             combo_sym_left {
@@ -61,6 +58,8 @@
                 key-positions = <20 2>;
                 bindings = <&mo SYM>;
             };
+
+            // COMBO RIGHT HAND
             combo_enter_right {
                 timeout-ms = <50>;
                 key-positions = <16 17>;
@@ -74,7 +73,7 @@
             combo_nav_right {
                 timeout-ms = <50>;
                 slow-release;
-                key-positions = <31 16>;
+                key-positions = <31>;
                 bindings = <&mo NAV>;
             };
             combo_sym_right {
@@ -83,6 +82,8 @@
                 key-positions = <31 7>;
                 bindings = <&mo SYM>;
             };
+
+            // COMBO BOTH HANDS
             combo_control_layer {
                 timeout-ms = <50>;
                 key-positions = <20 31>;
@@ -237,7 +238,7 @@ label= "WRITE"                           ;
 
                 &kp Q       &kp W       &kp F       &kp P       &kp B           &kp J       &kp L       &kp U       &kp Y       &kp SQT
                 &mt LCTRL A &mt LALT R  &td_s_or_all &mt LSHFT T &mt LGUI G     &mt RGUI M  &mt RSHIFT N &kp E      &mt RALT I  &mt LCTRL O
-    &mo NAV     &kp X       &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &kp MINUS    &mo NAV 
+    &none       &kp X       &kp C       &kp D       &kp V       &kp Z           &kp K       &kp H       &td_sdots   &td_dots    &kp MINUS    &none 
                                         &kp BSPC    &mt TAB SPACE &kp ENTER     &none       &none       &td_marks       
                         >;
                 };
